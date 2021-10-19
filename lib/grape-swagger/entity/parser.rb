@@ -110,7 +110,8 @@ module GrapeSwagger
                         end
 
         params = nested_entity.nested_exposures.each_with_object({}) do |value, memo|
-          memo[value.attribute] = value.send(:options)
+          # attribute 作为 Exposure 提取字段用，key 作为文档渲染用
+          memo[value.key] = value.send(:options)
         end
 
         properties, required = parse_grape_entity_params(params, nested_entity)
